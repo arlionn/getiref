@@ -1,0 +1,29 @@
+d 'GETIREF': module to get meta data and PDF file of an article given {DOI}
+d
+d getiref make it easy to get meta data of most academic articles using their DOIs. 
+d It gets information like Author name, Publication year, article Title, page range,
+d and even provides links to PDFs, as well as .bibtex/.ris files associated with an anticle.
+d
+d The citation information can be displayed and exported in various styles, 
+d including Markdown, LaTeX, or Plain text.  
+d This feature enables easy insertion or pasting into .md, .docx, or .tex documents.
+d It proves highly practical for efficient literature note-taking, 
+d significantly saving time on downloading, organizing PDF documents, and managing references.
+d
+d KW: doi.org
+d KW: crossref
+d KW: datacite
+d KW: DOI
+d KW: citation
+d KW: meta
+d
+d Requires: Stata version 14
+d
+d Distribution-Date: 20241105
+d version: 1.5
+d
+d Author: Lian Yu-jun, Lingnan College, Sun Yat-Sen University, China
+d Support: email arlionn@@163.com
+d
+f getiref.ado
+f getiref.sthlp

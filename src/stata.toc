@@ -1,0 +1,8 @@
+v 1.8
+
+d Authors: Yujun lian
+d Contact: arlionn@163.com
+
+d 'getiref': get meta data and PDF file of an article given {DOI}
+
+p getiref  module to get article citation and PDF file given DOI
