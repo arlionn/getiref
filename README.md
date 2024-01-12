@@ -42,9 +42,12 @@ It proves highly  practical for efficient literature note-taking, significantly 
 ![20240113004454](https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/20240113004454.png)
 
 ```stata
-. getiref 10.1257/aer.109.4.1197, md pdf 
+. getiref 10.1257/aer.109.4.1197, md pdf bib
 ```
-The PDF documents of this paper will be download and .bibtex and .ris files are listed, as well as a citation text in Markdown format
+The PDF documents of this paper will be download and .bibtex and .ris files are listed, 
+![20240113005154](https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/20240113005154.png)
+
+Moreover, the citation text in Markdown format will be displayed in Results Window:
 ```md
 Blanchard, O. (2019). Public Debt and Low Interest Rates. American Economic Review, 109(4), 1197–1229.
 [Link](https://doi.org/10.1257/aer.109.4.1197) (rep),
