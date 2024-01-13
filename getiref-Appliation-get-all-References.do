@@ -133,10 +133,10 @@
     local save "`saving'"   
     	    noi dis " "
     		noi dis _dup(58) "-" _n ///
-    				_col(3)  `"{stata `" view  "`path'/`save'" "': View}"' ///
-    				_col(17) `"{stata `" !open "`path'/`save'" "' : Open_Mac}"' ///
-    				_col(30) `"{stata `" winexec cmd /c start "" "`path'/`save'" "' : Open_Win}"' ///
-                    _col(50) `"{browse `"`path'"': dir}"'
+            _col(3)  `"{stata `" view  "`path'/`save'" "': View}"' ///
+            _col(17) `"{stata `" !open "`path'/`save'" "' : Open_Mac}"' ///
+            _col(30) `"{stata `" winexec cmd /c start "" "`path'/`save'" "' : Open_Win}"' ///
+            _col(50) `"{browse `"`path'"': dir}"'
             noi dis _dup(58) "-"
  
 * ---------------------- over ----------------------- 
