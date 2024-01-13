@@ -1,4 +1,4 @@
-## 输出结果
+## Results
 
 After executing [getiref-Appliation-get-all-References.do](https://gitee.com/arlionn/getiref/blob/master/getiref-Appliation-get-all-References.do) in Stata, you can obtain the reference information for the following literature:
 
