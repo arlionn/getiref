@@ -1,6 +1,10 @@
 ## 输出结果
 
-在 Stata 中执行 [getiref-Appliation-get-all-References.do](https://gitee.com/arlionn/getiref/blob/master/getiref-Appliation-get-all-References.do) 文档后输出的 Markdown 文档：
+After executing [getiref-Appliation-get-all-References.do](https://gitee.com/arlionn/getiref/blob/master/getiref-Appliation-get-all-References.do) in Stata, you can obtain the reference information for the following literature:
+
+> Rios-Avila, F. (2020). Smooth varying-coefficient models in Stata. The Stata Journal, 20(3), 647–679. [Link](https://doi.org/10.1177/1536867X20953574), [PDF](http://sci-hub.ren/10.1177/1536867X20953574), [Google](<https://scholar.google.com/scholar?q=Smooth varying-coefficient models in Stata>).
+
+We get a Markdown document like this：
 
 
 - Cai, Z., Das, M., Xiong, H., & Wu, X. (2006). Functional coefficient instrumental variables models. Journal of Econometrics, 133(1), 207–241. [Link](https://doi.org/10.1016/j.jeconom.2005.03.014), [PDF](http://sci-hub.ren/10.1016/j.jeconom.2005.03.014), [Google](<https://scholar.google.com/scholar?q=Functional coefficient instrumental variables models>).
