@@ -6,7 +6,7 @@ Stata module to get metadata and PDF file of an article given {DOI}
 ```stata
 ssc install cnssc, replace
 
-cnssc install getiref, replace
+cnssc install getiref, replace   // install
 
 help getiref 
 ```
@@ -60,19 +60,38 @@ In Markdown editor, it displays as:
 
 ## 4. Advanced usage 
 
+以 `getiref` 为内核 (发动机)，我们可以获取一篇论文的所有参考文献和后续引文的 metadata，下载 PDF 文档和用于导入参考文献管理软件的 .bibtex 或 .ris 文件。下面例子展示了如何使用该命令获得一篇论文的参考文献信息。
+
 With `getiref` as the core engine, we can obtain the metadata for all references and subsequent citations of a paper, download **PDF documents**, and acquire **.bibtex** or **.ris** files for importing into reference management software. 
 
 The following example demonstrates how to use this command to obtain the reference information for a paper.
 
-- Stata dofile: [getiref-Appliation-get-all-References.do](https://gitee.com/arlionn/getiref/blob/master/getiref-Appliation-get-all-References.do)
+- Stata dofile: [getiref-get-all-refs.do](https://gitee.com/arlionn/getiref/blob/master/getiref-get-all-refs.do)
 - Results: [results-Markdown.md](https://gitee.com/arlionn/getiref/blob/master/results-Markdown.md)
+
+### Stata 
+
+First, you can download the sample dofile '**getiref-get-all-refs.do**' by typing:
+```stata
+cnssc get getiref, replace // download
+```
+You may see:
+
+![20240116003802](https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/20240116003802.png)
+
+Then, you can click `getiref-get-all-refs.do` to open the dofile, or type the following commands:
+```stata
+doedit "getiref-get-all-refs.do" 
+```
+If neccessary, modify the inputs in this dofile, and press shortcut **Ctrl+D** to excute the whole dofile.
 
 ## 5. Author
 - **Yujun Lian** (连玉君) Lingnan College, Sun Yat-Sen University, China.
-- E-mail: arlionn@163.com
+- E-mail: arlionn@163.com 
 - Blog: [lianxh.cn](https://www.lianxh.cn)
 
 ## 6. Questions and Suggestions
 If you encounter any issues or have suggestions while using the tool, we will address them promptly. Please email us at: <arlionn@163.com>
 
 You can also submit your suggestions by filling out Issues in the project's [GitHub](https://github.com/arlionn/getiref) or [Gitee-Chinese](https://gitee.com/arlionn/getiref)  repository.
+
