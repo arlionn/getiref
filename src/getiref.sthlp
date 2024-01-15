@@ -1,7 +1,7 @@
 {smcl}
 {* *! version 1.8  12Jun2024}{...}
 {hi:help getiref}{right:also see: {helpb lianxh}}
-{right: {browse "https://www.lianxh.cn"}}
+{right: {browse "https://github.com/arlionn/getiref"}}
 {hline}
 
 {marker title}{...}
@@ -340,11 +340,15 @@ Blog: {browse "https://www.lianxh.cn":lianxh.cn} {break}
 {title:Questions and Suggestions}
 
 {p 4 4 2}
-If you encounter any issues or have suggestions while using the tool, we will address them promptly. Please email us at:
+If you encounter any issues or have suggestions while using the tool,
+we will address them promptly. Please email us at:
 {browse "mailto:arlionn@163.com":arlionn@163.com}.
 
 {p 4 4 2}
-You can also submit your suggestions by filling out {browse "https://github.com/arlionn/getiref/issues/":Issues} in the project's {browse "https://github.com/arlionn/getiref":GitHub repository}.
+You can also submit your suggestions by filling out
+{browse "https://github.com/arlionn/getiref/issues/":Issues}
+in the project's {browse "https://github.com/arlionn/getiref":GitHub} repository.
+For Chinese users, please visit the {browse "https://gitee.com/arlionn/getiref":Gitee} repository.
 
 
 {title:Also see}

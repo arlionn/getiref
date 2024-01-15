@@ -19,11 +19,12 @@ d KW: meta
 d
 d Requires: Stata version 14
 d
-d Distribution-Date: 20241105
-d version: 1.5
+d Distribution-Date: 20240115
+d version: 1.9
 d
 d Author: Lian Yu-jun, Lingnan College, Sun Yat-Sen University, China
 d Support: email arlionn@@163.com
 d
 f getiref.ado
 f getiref.sthlp
+f getiref-get-all-refs.do

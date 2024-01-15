@@ -1,4 +1,6 @@
-*! version 1.8 2024/1/11
+*! version 1.9 2024/1/15
+*    fix bugs for 'latex' option
+*  version 1.8 2024/1/11
 *    more robust to mirror error or bug
 *  version 1.7 2024/1/7 
 *    兼容来自 datacite 的 doi，如 arXiv
@@ -322,8 +324,11 @@ preserve //>>>>>>>>>>>>>>>>>>>>>>>>>>>>> preserve begin
 *--------------- 
 //    local DOI "10.1111/j.1467-629X.2010.00375.x"
 //    local DOI 10.1111/j.1467-629X.2010.00375.x
-   
-   get_doidata `DOI'   // .... download meta data , new 2024/1/8 13:27
+
+   if "`latex'" == ""    local tex_opt ""
+   else                  local tex_opt ", `latex'"
+       
+   get_doidata `DOI' `tex_opt'  // .... download meta data , new 2024/1/8 13:27
                        // suit for both 'crossref' and 'datacite'
    
    local DOI = "`r(DOI)'"
@@ -588,7 +593,7 @@ preserve //>>>>>>>>>>>>>>>>>>>>>>>>>>>>> preserve begin
 //      local link_br  `"{browse "`link'":Link}"'
         local link_md      `" [Link](`a_blank'`link'`a_blank')"'
         local link_md_dis  `" [`link_br'](`a_blank'`link'`a_blank')"'
-        local link_tex     `" \href{Link}{`link'}"'
+        local link_tex     `" \href{`link'}{Link}"'
         local link_tex_dis `" \href{`link'}{`link_br'}"'
         local link_plain   `" Link: `link'"'   
 
@@ -749,10 +754,10 @@ preserve //>>>>>>>>>>>>>>>>>>>>>>>>>>>>> preserve begin
 *---------------  
 // set trace on 
   if "`cite'" != ""{
-      get_cite `v_body', doi("`DOI'") link        // author (Year), with link
+      get_cite `v_body', doi("`DOI'") link `latex'         // author (Year), with link
   }
-  if "`c1'" != "" | "`cite1'" != ""{              // intext, with link
-      get_cite `v_body', doi("`DOI'") link intext // (author, Year)
+  if "`c1'" != "" | "`cite1'" != ""{                       // intext, with link
+      get_cite `v_body', doi("`DOI'") link intext `latex'  // (author, Year)
   }  
   if "`c2'" != "" | "`cite2'" != ""{              // plain text, no link
       get_cite `v_body', doi("`DOI'")      
@@ -843,9 +848,9 @@ preserve //>>>>>>>>>>>>>>>>>>>>>>>>>>>>> preserve begin
 
   get_au_yr_ti "`ref_body'", doi("`DOI'") 
 
-//   return local au_yr "`r(au_yr)'"
-//   return local au_yr_ti "`r(au_yr_ti)'"
-//   return local au_yr_doi "`r(au_yr_doi)'"
+  return local au_yr "`r(au_yr)'"
+  return local au_yr_ti "`r(au_yr_ti)'"
+  return local au_yr_doi "`r(au_yr_doi)'"
    
   return local link_br      = `"`link_br'"'
   return local pdf_br       = `"`pdf_br'"'
@@ -1018,7 +1023,7 @@ program define get_doidata, rclass
 *  input: {DOI}
 * output: local `ref_body' and `ref_full' with meta data for given {DOI} 
 
-syntax anything(name=DOI) [, Display]
+syntax anything(name=DOI) [, Display Latex]
 
 preserve 
 
@@ -1109,6 +1114,10 @@ preserve
   local regex "&amp;"
   qui replace `v_ref' = subinstr(`v_ref', `"`regex'"', "&", .)
 
+  if "`latex'"!=""{  // update: 2024/1/13 18:14
+      local regex "&"
+      qui replace `v_ref' = subinstr(`v_ref', "`regex'", "\&", .)      
+  }
 
 *-Author names: from 'ALL Upper' to 'Proper' 
   * e.g.   GOLDSTEIN, I., YANG, S., & ZUO, L. (2023)
@@ -1354,7 +1363,8 @@ end
 /*
 test:
 global DOI "10.1093/rfs/hhs072" 
-global DOI "10.1257/aer.109.4.1197"   
+global DOI "10.1257/aer.109.4.1197"  
+global DOI "10.1016/j.jeconom.2020.10.012"  // 2 authors
 get_cite body, doi("$DOI") 
 ret list 
 get_cite body, doi("$DOI") link
@@ -1367,7 +1377,7 @@ program define get_cite, rclass
 *  input: {DOI}
 * output: Author (Year)
 
-syntax varname , DOI(string) [Link Intext]
+syntax varname , DOI(string) [Link Intext Latex]
 
 preserve 
 
@@ -1405,6 +1415,7 @@ preserve
   *-get Author 2
     tempvar au au_u
     if `n_authors' == 2{
+        replace `aulist' = subinstr(`aulist', "\", "", .)
         qui split `aulist', parse(`" & "') gen(`au')
         qui split `au'2, parse(,) gen(`au_u')
         local au_2 = `au_u'1[1]
@@ -1414,9 +1425,16 @@ preserve
     if "`link'" != ""{
         local art_link "https://doi.org/`DOI'"
         local pdf_web  "${sci__hub_}/`DOI'"     // http://sci-hub.ren/ or return by get_scihub.ado
-
-        local au_1 "[`au_1'](`art_link')"
-        local year "[`year'](`pdf_web')"
+        
+        if "`latex'"==""{  // link with Markdown format
+            local au_1 "[`au_1'](`art_link')"
+            local year "[`year'](`pdf_web')"
+        }
+        else{
+            local au_1 "\href{`art_link'}{`au_1'}"
+            local year "\href{`pdf_web'}{`year'}"            
+        }
+        
     }
     
   *-cite format 
