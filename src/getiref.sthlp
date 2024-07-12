@@ -1,6 +1,6 @@
 {smcl}
-{* *! version 1.8  12Jun2024}{...}
-{hi:help getiref}{right:also see: {helpb lianxh}}
+{* *! version 2.1  12Jul2024}{...}
+{hi:help getiref}{right:also see: {help lianxh}}
 {right: {browse "https://github.com/arlionn/getiref"}}
 {hline}
 
@@ -354,6 +354,6 @@ For Chinese users, please visit the {browse "https://gitee.com/arlionn/getiref":
 {title:Also see}
 
 {psee} Online:  
-{help liaxh} (if installed),
+{help lianxh} (if installed),
 {help songbl} (if installed),
 {help cnssc} (if installed)

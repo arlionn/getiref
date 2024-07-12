@@ -1,4 +1,11 @@
-*! version 1.9 2024/1/15
+*!  version 2.1  2024/7/12 
+*    Papers form arXiv.org can be sent to CLIP now. 
+*  version 1.10.1 2024/5/18
+*    update American Journal of Political Science (open access)
+*    https://onlinelibrary.wiley.com/doi/epdf/10.1111/ajps.12808
+*  version 1.10 2024/5/17
+*    update PDF link for SJ papers
+*  version 1.9 2024/1/15
 *    fix bugs for 'latex' option
 *  version 1.8 2024/1/11
 *    more robust to mirror error or bug
@@ -478,6 +485,31 @@ preserve //>>>>>>>>>>>>>>>>>>>>>>>>>>>>> preserve begin
       local pdf_source = 1  // non SCI-HUB
   } 
   
+*-Stata Journal  
+* DOI: 10.1177/1536867
+* PDF: https://journals.sagepub.com/doi/pdf/10.1177/1536867X20909689
+*      https://journals.sagepub.com/doi/pdf/10.1177/1536867X1801800409
+  local key "10.1177/1536867"
+  if strpos(`"`DOI'"', "`key'"){
+      local link "https://journals.sagepub.com/doi/`DOI'"
+      local pdf_root "https://journals.sagepub.com/doi/pdf"
+      local pdf_web "`pdf_root'/`DOI'"
+      local pdf_source = 1  // non SCI-HUB
+  }   
+  
+  
+/* 2022年以前的都可以通过 SCI-HUB 获取，只有最近两年的需要特别处理
+*-American Journal of Political Science (open access)
+* DOI: 10.1111/ajps
+* PDF: https://onlinelibrary.wiley.com/doi/pdf/10.1111/ajps.12808  
+  local key "10.1111/ajps"
+  if strpos(`"`DOI'"', "`key'"){
+      local link "https://onlinelibrary.wiley.com/doi/`DOI'"
+      local pdf_root "https://onlinelibrary.wiley.com/doi/pdf/"
+      local pdf_web "`pdf_root'/`DOI'"
+      local pdf_source = 1  // non SCI-HUB
+  }  */ 
+  
 *-TBD: add more Journals with Open Access
 /* Open Access Journal list
    view browse "https://openaccesspub.org/about"
@@ -820,7 +852,7 @@ preserve //>>>>>>>>>>>>>>>>>>>>>>>>>>>>> preserve begin
   }  
      
   *-send to CLIP
-    
+
     if "`clipoff'" == ""{
         dis " "
         get_clipout "`refout'", `clipoff' `notip'  
@@ -1137,6 +1169,14 @@ preserve
 *-delete trailing blanks
   local ref0 = strrtrim(`"`ref0'"') 
 
+*-delete special characters (e.g., '\t', '\n')
+  local ref0 = subinstr(`"`ref0'"', char(9),  "", .)  // 去掉制表符
+  local ref0 = subinstr(`"`ref0'"', char(10), "", .)  // 去掉换行符
+  local ref0 = subinstr(`"`ref0'"', char(13), "", .)  // 去掉回车符
+  local ref0 = subinstr(`"`ref0'"', char(12), "", .)  // 去掉换页符
+  local ref0 = subinstr(`"`ref0'"', char(11), "", .)  // 去掉垂直制表符
+  local ref0 = subinstr(`"`ref0'"', char(0),  "", .)  // 去掉空字符
+  local ref0 = subinstr(`"`ref0'"', char(8),  "", .)  // 去掉退格符  
 
 *-shorter Journal name
   * From: The Stata Journal:Promoting Communications on Statistics and Stata"
