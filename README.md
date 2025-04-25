@@ -4,9 +4,7 @@ Stata module to get metadata and PDF file of an article given {DOI}
 ## 1. Install
 
 ```stata
-ssc install cnssc, replace
-
-cnssc install getiref, replace   // install
+ssc install getiref, replace
 
 help getiref 
 ```
